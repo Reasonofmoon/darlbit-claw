@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reason of Moon | The Living Computer</title>
+    <style>
+        /* 🌑 Universe Base */
+        :root {
+            --void-bg: #000000;
+            --star-color: rgba(255, 255, 255, 0.8);
+            --core-glow: #38bdf8;
+            --danger-glow: #f43f5e;
+            --glass-panel: rgba(15, 23, 42, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+        }
+        body {
+            margin: 0;
+            background: var(--void-bg);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden; /* App-like feel */
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 300px 1fr 350px;
+            grid-template-rows: 60px 1fr 60px;
+        }
+
+        /* ✨ Starfield Animation */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: drift 100s linear infinite;
+            opacity: 0.3;
+        }
+        @keyframes drift { from { background-position: 0 0; } to { background-position: 0 1000px; } }
+
+        /* 🖼️ Glass Panels */
+        .panel {
+            background: var(--glass-panel);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .panel:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.1);
+        }
+
+        /* 🧠 Neural Core (Center) */
+        .main-stage {
+            grid-column: 2;
+            grid-row: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .core {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #38bdf8, #0f172a);
+            box-shadow: 0 0 60px var(--core-glow);
+            animation: pulse 4s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            z-index: 10;
+        }
+        .core::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 1px dashed rgba(56, 189, 248, 0.3);
+            border-radius: 50%;
+            animation: spin 20s linear infinite;
+        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 50px var(--core-glow); } 50% { transform: scale(1.05); box-shadow: 0 0 80px var(--core-glow), 0 0 20px #fff; } }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        /* 📜 Terminal (Left) */
+        .sidebar-left {
+            grid-column: 1;
+            grid-row: 2;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: #94a3b8;
+            overflow: hidden;
+        }
+        .log-entry { margin-bottom: 0.5rem; border-left: 2px solid #334155; padding-left: 0.5rem; opacity: 0.7; }
+        .log-entry.new { border-left-color: var(--core-glow); color: #e2e8f0; opacity: 1; animation: flash 1s; }
+        @keyframes flash { from { background: rgba(56, 189, 248, 0.2); } to { background: transparent; } }
+
+        /* 🌌 Skill Map (Right) */
+        .sidebar-right {
+            grid-column: 3;
+            grid-row: 2;
+        }
+        .scroller { overflow-y: auto; height: 100%; padding-right: 0.5rem; }
+        .scroller::-webkit-scrollbar { width: 4px; }
+        .scroller::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        
+        .skill-node {
+            background: rgba(255,255,255,0.05);
+            margin-bottom: 0.8rem;
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+        .skill-node:hover { background: rgba(255,255,255,0.1); border-left-color: var(--moon-accent); }
+        .skill-node h4 { margin: 0; color: #f1f5f9; font-size: 0.9rem; }
+        .skill-node span { font-size: 0.75rem; color: #64748b; display: block; margin-top: 0.2rem; }
+
+        /* 🧪 Header/Footer */
+        header { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; border-bottom: 1px solid var(--glass-border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); z-index: 20; }
+        footer { grid-column: 1 / -1; grid-row: 3; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--glass-border); font-size: 0.8rem; color: #475569; }
+        
+        .brand { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Utility */
+        .tag { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: #334155; margin-right: 5px; }
+        .tag.core { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+        .tag.hygiene { background: rgba(244, 114, 182, 0.2); color: #f472b6; }
+    </style>
+</head>
+<body>
+    <div class="stars"></div>
+
+    <header>
+        <div class="brand">Reason of Moon // OS</div>
+        <div style="font-family: var(--font-mono); font-size: 0.8rem;">
+            SYSTEM: <span style="color:#4ade80">ONLINE</span> | MEMORY: <span style="color:#38bdf8">OK</span>
+        </div>
+    </header>
+
+    <div class="panel sidebar-left">
+        <h3 style="margin-top:0; font-size:0.9rem; text-transform:uppercase; color:#64748b;">Terminal Stream</h3>
+        <div id="terminal-output">
+            <div class="log-entry">[SYSTEM] Moltbot Kernel Loaded.</div>
+            <div class="log-entry">[MEMORY] AGENTS.md verified.</div>
+            <div class="log-entry">[HYGIENE] clean_modules.py executed.</div>
+            <div class="log-entry new">[ACTIVE] Listening for thoughts...</div>
+        </div>
+    </div>
+
+    <div class="main-stage">
+        <div class="core">🌑</div>
+        <h2 style="margin-top: 3rem; font-weight: 300; letter-spacing: 1px;">The Reflective Intelligence</h2>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button class="panel" style="padding: 0.8rem 2rem; cursor: pointer; color: #38bdf8; font-weight: 700;">INITIATE REFLECTION</button>
+            <button class="panel" style="padding: 0.8rem 2rem; cursor: pointer; color: #f472b6; font-weight: 700;">ENTER OBLIVION</button>
+        </div>
+    </div>
+
+    <div class="panel sidebar-right">
+        <h3 style="margin-top:0; font-size:0.9rem; text-transform:uppercase; color:#64748b;">Living Grimoire (97)</h3>
+        <div class="scroller">
+            <div class="skill-node">
+                <h4><span class="tag core">CORE</span>ConnectEdu-3</h4>
+                <span>Next.js 16 / Gemini 3.0 / Jules Memory</span>
+            </div>
+            <div class="skill-node">
+                <h4><span class="tag hygiene">HYGIENE</span>Oblivion Protocol</h4>
+                <span>Failure Management / Debris Purge</span>
+            </div>
+            <div class="skill-node">
+                <h4><span class="tag core">CORE</span>Slide DNA Architect</h4>
+                <span>Visual Intelligence / P5.js Hybrid</span>
+            </div>
+            <div class="skill-node">
+                <h4><span class="tag hygiene">BACKUP</span>Golden Copy Strategy</h4>
+                <span>Zettelkasten 3-2-1 / Exclude node_modules</span>
+            </div>
+            <div class="skill-node">
+                <h4><span class="tag">TOOL</span>Citation Helper</h4>
+                <span>Automated Bibliography / APA Format</span>
+            </div>
+            <div class="skill-node">
+                <h4><span class="tag">TOOL</span>Report Converter</h4>
+                <span>Markdown to DOCX / Business Logs</span>
+            </div>
+            <!-- Dynamic Injection Here -->
+        </div>
+    </div>
+
+    <footer>
+        Running on Antigravity Engine v2.5 | 2026.02.04
+    </footer>
+
+    <script>
+        // Simulate Terminal Life
+        const logs = [
+            "[SEARCH] Indexing 97 skills...",
+            "[NET] Connecting to OpenClaw...",
+            "[OBLIVION] Scanning for tech debt...",
+            "[JULES] Snapshotting environment...",
+            "[KERNEL] Optimizing thought loops..."
+        ];
+        const terminal = document.getElementById('terminal-output');
+        
+        setInterval(() => {
+            const msg = logs[Math.floor(Math.random() * logs.length)];
+            const div = document.createElement('div');
+            div.className = 'log-entry new';
+            div.innerText = msg;
+            terminal.appendChild(div);
+            if(terminal.children.length > 10) terminal.removeChild(terminal.firstChild);
+        }, 3000);
+    </script>
+</body>
+</html>
