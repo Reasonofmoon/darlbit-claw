@@ -27,40 +27,18 @@
             grid-template-rows: 60px 1fr 60px;
         }
 
-        /* ✨ Starfield Animation */
+        /* ✨ Starfield Animation (Enhanced with Image) */
         .stars {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: -1;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            animation: drift 100s linear infinite;
-            opacity: 0.3;
+            background: url('assets/images/bg.png') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.4; /* Blend with deep black */
         }
-        @keyframes drift { from { background-position: 0 0; } to { background-position: 0 1000px; } }
-
-        /* 🖼️ Glass Panels */
-        .panel {
-            background: var(--glass-panel);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 1rem;
-            display: flex;
-            flex-direction: column;
-            transition: all 0.3s ease;
-        }
-        .panel:hover {
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 0 30px rgba(56, 189, 248, 0.1);
-        }
+        
+        /* ... existing panel styles ... */
 
         /* 🧠 Neural Core (Center) */
         .main-stage {
@@ -73,16 +51,18 @@
             position: relative;
         }
         .core {
-            width: 200px;
-            height: 200px;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #38bdf8, #0f172a);
+            /* background: radial-gradient(circle at 30% 30%, #38bdf8, #0f172a); REMOVED CSS GRADIENT */
+            background: url('assets/images/neural_core.png') no-repeat center center;
+            background-size: contain;
             box-shadow: 0 0 60px var(--core-glow);
             animation: pulse 4s ease-in-out infinite;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
+            /* font-size: 4rem; REMOVED EMOJI */
             z-index: 10;
         }
         .core::after {
