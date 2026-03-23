@@ -1,46 +1,181 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reason of Moon | The Living Computer</title>
+    <title>Reason of Moon | Reflective Intelligence OS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* 🌑 Universe Base */
         :root {
             --void-bg: #000000;
-            --star-color: rgba(255, 255, 255, 0.8);
+            --panel-bg: rgba(15, 23, 42, 0.6);
+            --panel-border: rgba(255, 255, 255, 0.08);
             --core-glow: #38bdf8;
-            --danger-glow: #f43f5e;
-            --glass-panel: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-        }
-        body {
-            margin: 0;
-            background: var(--void-bg);
-            color: #fff;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* App-like feel */
-            height: 100vh;
-            display: grid;
-            grid-template-columns: 300px 1fr 350px;
-            grid-template-rows: 60px 1fr 60px;
+            --genesis-glow: #a78bfa;
+            --reflection-glow: #f472b6;
+            --cognition-glow: #34d399;
+            --perception-glow: #fbbf24;
+            --danger: #f43f5e;
+            --success: #4ade80;
+            --idle: #fbbf24;
+            --dormant: #64748b;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }
 
-        /* ✨ Starfield Animation (Enhanced with Image) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--void-bg);
+            color: #e2e8f0;
+            font-family: var(--font-sans);
+            height: 100vh;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 320px 1fr 360px;
+            grid-template-rows: 56px 1fr 48px;
+        }
+
+        /* ✨ Animated Background */
         .stars {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: -1;
-            background: url('assets/images/bg.png') no-repeat center center fixed;
-            background-size: cover;
-            opacity: 0.4; /* Blend with deep black */
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(56, 189, 248, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(167, 139, 250, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(244, 114, 182, 0.02) 0%, transparent 50%);
         }
-        
-        /* ... existing panel styles ... */
 
-        /* 🧠 Neural Core (Center) */
+        .stars::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 50% 10%, rgba(255,255,255,0.5), transparent),
+                radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,0.2), transparent),
+                radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.4), transparent),
+                radial-gradient(1px 1px at 15% 90%, rgba(255,255,255,0.3), transparent),
+                radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.5), transparent);
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+        @keyframes twinkle { from { opacity: 0.6; } to { opacity: 1; } }
+
+        /* 🔝 Header */
+        header {
+            grid-column: 1 / -1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            border-bottom: 1px solid var(--panel-border);
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            z-index: 20;
+        }
+        .brand {
+            font-size: 1rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #38bdf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-stats {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            display: flex;
+            gap: 1.5rem;
+            color: #94a3b8;
+        }
+        .stat-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 4px; vertical-align: middle; }
+        .stat-dot.on { background: var(--success); box-shadow: 0 0 6px var(--success); }
+
+        /* 📜 Left Panel — Perception + Reflection */
+        .panel {
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--panel-border);
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        .panel::-webkit-scrollbar { width: 3px; }
+        .panel::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+        .panel-section { margin-bottom: 1.5rem; }
+        .panel-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .panel-title .layer-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+        }
+
+        /* Project Cards */
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .project-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(255, 255, 255, 0.12);
+            transform: translateX(2px);
+        }
+        .project-name { font-size: 0.8rem; font-weight: 500; }
+        .project-meta { font-size: 0.65rem; color: #64748b; margin-top: 2px; }
+
+        .health-bar {
+            width: 40px; height: 4px; border-radius: 2px;
+            background: rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+        .health-fill { height: 100%; border-radius: 2px; transition: width 0.5s; }
+
+        .status-badge {
+            font-size: 0.6rem;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .status-active { background: rgba(74, 222, 128, 0.15); color: var(--success); }
+        .status-idle { background: rgba(251, 191, 36, 0.15); color: var(--idle); }
+        .status-dormant { background: rgba(100, 116, 139, 0.15); color: var(--dormant); }
+
+        /* Nightshift Log */
+        .nightshift-entry {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: #94a3b8;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            line-height: 1.5;
+        }
+        .nightshift-entry.warn { color: var(--idle); }
+        .nightshift-entry.danger { color: var(--danger); }
+        .nightshift-entry.ok { color: var(--success); }
+
+        /* 🧠 Center — Neural Core */
         .main-stage {
             grid-column: 2;
             grid-row: 2;
@@ -49,78 +184,241 @@
             align-items: center;
             justify-content: center;
             position: relative;
+            overflow: hidden;
         }
-        .core {
-            width: 300px;
-            height: 300px;
+
+        /* Layer Ring */
+        .layer-rings {
+            position: relative;
+            width: 360px;
+            height: 360px;
+        }
+        .ring {
+            position: absolute;
             border-radius: 50%;
-            /* background: radial-gradient(circle at 30% 30%, #38bdf8, #0f172a); REMOVED CSS GRADIENT */
-            background: url('assets/images/neural_core.png') no-repeat center center;
-            background-size: contain;
-            box-shadow: 0 0 60px var(--core-glow);
-            animation: pulse 4s ease-in-out infinite;
+            border: 1px solid;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* font-size: 4rem; REMOVED EMOJI */
+        }
+        .ring-perception {
+            inset: 0;
+            border-color: rgba(251, 191, 36, 0.2);
+            animation: spin-slow 60s linear infinite;
+        }
+        .ring-cognition {
+            inset: 30px;
+            border-color: rgba(52, 211, 153, 0.25);
+            animation: spin-slow 45s linear infinite reverse;
+        }
+        .ring-reflection {
+            inset: 60px;
+            border-color: rgba(244, 114, 182, 0.3);
+            animation: spin-slow 30s linear infinite;
+        }
+        .ring-genesis {
+            inset: 90px;
+            border-color: rgba(167, 139, 250, 0.35);
+            animation: spin-slow 20s linear infinite reverse;
+        }
+        @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .core-orb {
+            position: absolute;
+            inset: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%,
+                rgba(56, 189, 248, 0.4),
+                rgba(167, 139, 250, 0.3),
+                rgba(15, 23, 42, 0.9));
+            box-shadow:
+                0 0 60px rgba(56, 189, 248, 0.3),
+                0 0 120px rgba(167, 139, 250, 0.1),
+                inset 0 0 40px rgba(0, 0, 0, 0.5);
+            animation: pulse-core 4s ease-in-out infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        @keyframes pulse-core {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 60px rgba(56, 189, 248, 0.3), 0 0 120px rgba(167, 139, 250, 0.1); }
+            50% { transform: scale(1.03); box-shadow: 0 0 80px rgba(56, 189, 248, 0.4), 0 0 160px rgba(167, 139, 250, 0.15), 0 0 20px rgba(255,255,255,0.1); }
+        }
+        .core-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+        .core-count { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #38bdf8, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        /* Ring Labels */
+        .ring-label {
+            position: absolute;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 2px 8px;
+            border-radius: 10px;
             z-index: 10;
         }
-        .core::after {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            border: 1px dashed rgba(56, 189, 248, 0.3);
-            border-radius: 50%;
-            animation: spin 20s linear infinite;
-        }
-        @keyframes pulse { 0%, 100% { transform: scale(1); box-shadow: 0 0 50px var(--core-glow); } 50% { transform: scale(1.05); box-shadow: 0 0 80px var(--core-glow), 0 0 20px #fff; } }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .ring-label.l1 { top: -10px; left: 50%; transform: translateX(-50%); background: rgba(251,191,36,0.15); color: var(--perception-glow); }
+        .ring-label.l2 { right: -10px; top: 50%; transform: translateY(-50%); background: rgba(52,211,153,0.15); color: var(--cognition-glow); }
+        .ring-label.l3 { bottom: -10px; left: 50%; transform: translateX(-50%); background: rgba(244,114,182,0.15); color: var(--reflection-glow); }
+        .ring-label.l4 { left: -10px; top: 50%; transform: translateY(-50%); background: rgba(167,139,250,0.15); color: var(--genesis-glow); }
 
-        /* 📜 Terminal (Left) */
-        .sidebar-left {
-            grid-column: 1;
-            grid-row: 2;
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
+        /* Legend under core */
+        .layer-legend {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
             color: #94a3b8;
-            overflow: hidden;
         }
-        .log-entry { margin-bottom: 0.5rem; border-left: 2px solid #334155; padding-left: 0.5rem; opacity: 0.7; }
-        .log-entry.new { border-left-color: var(--core-glow); color: #e2e8f0; opacity: 1; animation: flash 1s; }
-        @keyframes flash { from { background: rgba(56, 189, 248, 0.2); } to { background: transparent; } }
+        .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-        /* 🌌 Skill Map (Right) */
-        .sidebar-right {
+        /* Stats row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            width: 100%;
+            max-width: 500px;
+        }
+        .stat-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.4rem; font-weight: 800; }
+        .stat-label { font-size: 0.6rem; color: #64748b; margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* 🌌 Right Panel — Genesis + Skills */
+        .panel-right {
             grid-column: 3;
             grid-row: 2;
-        }
-        .scroller { overflow-y: auto; height: 100%; padding-right: 0.5rem; }
-        .scroller::-webkit-scrollbar { width: 4px; }
-        .scroller::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-        
-        .skill-node {
-            background: rgba(255,255,255,0.05);
-            margin-bottom: 0.8rem;
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            border-left: 1px solid var(--panel-border);
             padding: 1rem;
+            overflow-y: auto;
+        }
+        .panel-right::-webkit-scrollbar { width: 3px; }
+        .panel-right::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+        /* Idea Cards */
+        .idea-card {
+            background: linear-gradient(135deg, rgba(167,139,250,0.08), rgba(56,189,248,0.05));
+            border: 1px solid rgba(167,139,250,0.15);
+            border-radius: 10px;
+            padding: 0.8rem;
+            margin-bottom: 0.6rem;
+            transition: all 0.2s;
+        }
+        .idea-card:hover {
+            border-color: rgba(167,139,250,0.3);
+            transform: translateX(-2px);
+        }
+        .idea-title { font-size: 0.8rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .idea-meta { font-size: 0.65rem; color: #94a3b8; }
+        .idea-badge {
+            display: inline-block;
+            font-size: 0.55rem;
+            padding: 1px 6px;
+            border-radius: 4px;
+            margin-right: 4px;
+            font-weight: 600;
+        }
+        .badge-high { background: rgba(244,63,94,0.15); color: #f43f5e; }
+        .badge-medium { background: rgba(251,191,36,0.15); color: #fbbf24; }
+
+        /* Skill nodes */
+        .skill-node {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 0.5rem;
+            padding: 0.6rem 0.8rem;
             border-radius: 8px;
             cursor: pointer;
+            transition: all 0.2s;
             border-left: 3px solid transparent;
         }
-        .skill-node:hover { background: rgba(255,255,255,0.1); border-left-color: var(--moon-accent); }
-        .skill-node h4 { margin: 0; color: #f1f5f9; font-size: 0.9rem; }
-        .skill-node span { font-size: 0.75rem; color: #64748b; display: block; margin-top: 0.2rem; }
+        .skill-node:hover { background: rgba(255,255,255,0.06); }
+        .skill-node.core { border-left-color: var(--core-glow); }
+        .skill-node.genesis { border-left-color: var(--genesis-glow); }
+        .skill-node.reflection { border-left-color: var(--reflection-glow); }
+        .skill-node.perception { border-left-color: var(--perception-glow); }
+        .skill-node h4 { font-size: 0.8rem; font-weight: 500; margin: 0; }
+        .skill-node span { font-size: 0.65rem; color: #64748b; display: block; margin-top: 2px; }
 
-        /* 🧪 Header/Footer */
-        header { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; padding: 0 2rem; border-bottom: 1px solid var(--glass-border); background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); z-index: 20; }
-        footer { grid-column: 1 / -1; grid-row: 3; display: flex; align-items: center; justify-content: center; border-top: 1px solid var(--glass-border); font-size: 0.8rem; color: #475569; }
-        
-        .brand { font-size: 1.2rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; background: linear-gradient(90deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Utility */
-        .tag { font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; background: #334155; margin-right: 5px; }
-        .tag.core { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
-        .tag.hygiene { background: rgba(244, 114, 182, 0.2); color: #f472b6; }
+        .tag {
+            font-size: 0.55rem;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+            margin-right: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .tag-l1 { background: rgba(251,191,36,0.15); color: var(--perception-glow); }
+        .tag-l2 { background: rgba(52,211,153,0.15); color: var(--cognition-glow); }
+        .tag-l3 { background: rgba(244,114,182,0.15); color: var(--reflection-glow); }
+        .tag-l4 { background: rgba(167,139,250,0.15); color: var(--genesis-glow); }
+
+        /* Footer */
+        footer {
+            grid-column: 1 / -1;
+            grid-row: 3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            border-top: 1px solid var(--panel-border);
+            font-size: 0.7rem;
+            color: #475569;
+            font-family: var(--font-mono);
+        }
+        .pulse-indicator {
+            width: 6px; height: 6px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+            display: inline-block;
+            margin-right: 6px;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* Domain Filter Tabs */
+        .domain-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 0.75rem;
+            flex-wrap: wrap;
+        }
+        .domain-tab {
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .domain-tab:hover, .domain-tab.active { background: rgba(56,189,248,0.15); color: #38bdf8; border-color: rgba(56,189,248,0.3); }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+            margin: 1rem 0;
+        }
     </style>
 </head>
 <body>
@@ -128,84 +426,288 @@
 
     <header>
         <div class="brand">Reason of Moon // OS</div>
-        <div style="font-family: var(--font-mono); font-size: 0.8rem;">
-            SYSTEM: <span style="color:#4ade80">ONLINE</span> | MEMORY: <span style="color:#38bdf8">OK</span>
+        <div class="header-stats">
+            <span><span class="stat-dot on"></span>SYSTEM: ONLINE</span>
+            <span id="header-projects">PROJECTS: --</span>
+            <span id="header-skills">SKILLS: 101</span>
+            <span id="header-time"></span>
         </div>
     </header>
 
-    <div class="panel sidebar-left">
-        <h3 style="margin-top:0; font-size:0.9rem; text-transform:uppercase; color:#64748b;">Terminal Stream</h3>
-        <div id="terminal-output">
-            <div class="log-entry">[SYSTEM] Moltbot Kernel Loaded.</div>
-            <div class="log-entry">[MEMORY] AGENTS.md verified.</div>
-            <div class="log-entry">[HYGIENE] clean_modules.py executed.</div>
-            <div class="log-entry new">[ACTIVE] Listening for thoughts...</div>
+    <!-- LEFT PANEL: Perception + Reflection -->
+    <div class="panel" id="left-panel">
+        <div class="panel-section">
+            <div class="panel-title">
+                <span class="layer-dot" style="background:var(--perception-glow)"></span>
+                L1 Perception — Projects
+            </div>
+            <div class="domain-tabs" id="domain-tabs"></div>
+            <div id="project-list"></div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="panel-section">
+            <div class="panel-title">
+                <span class="layer-dot" style="background:var(--reflection-glow)"></span>
+                L3 Reflection — Nightshift
+            </div>
+            <div id="nightshift-feed"></div>
         </div>
     </div>
 
+    <!-- CENTER: Neural Core -->
     <div class="main-stage">
-        <div class="core">🌑</div>
-        <h2 style="margin-top: 3rem; font-weight: 300; letter-spacing: 1px;">The Reflective Intelligence</h2>
-        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-            <button class="panel" style="padding: 0.8rem 2rem; cursor: pointer; color: #38bdf8; font-weight: 700;">INITIATE REFLECTION</button>
-            <button class="panel" style="padding: 0.8rem 2rem; cursor: pointer; color: #f472b6; font-weight: 700;">ENTER OBLIVION</button>
+        <div class="layer-rings">
+            <span class="ring-label l1">Perception</span>
+            <span class="ring-label l2">Cognition</span>
+            <span class="ring-label l3">Reflection</span>
+            <span class="ring-label l4">Genesis</span>
+
+            <div class="ring ring-perception"></div>
+            <div class="ring ring-cognition"></div>
+            <div class="ring ring-reflection"></div>
+            <div class="ring ring-genesis"></div>
+            <div class="core-orb">
+                <div class="core-label">Moltbot</div>
+                <div class="core-count" id="core-health">--</div>
+                <div class="core-label" style="font-size:0.55rem; margin-top:2px">Health</div>
+            </div>
+        </div>
+
+        <div class="layer-legend">
+            <div class="legend-item"><span class="legend-dot" style="background:var(--perception-glow)"></span>Perception</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--cognition-glow)"></span>Cognition</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--reflection-glow)"></span>Reflection</div>
+            <div class="legend-item"><span class="legend-dot" style="background:var(--genesis-glow)"></span>Genesis</div>
+        </div>
+
+        <div class="stats-row" id="stats-row">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-active" style="color:var(--success)">-</div>
+                <div class="stat-label">Active</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-idle" style="color:var(--idle)">-</div>
+                <div class="stat-label">Idle</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-dormant" style="color:var(--dormant)">-</div>
+                <div class="stat-label">Dormant</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-total" style="color:var(--core-glow)">-</div>
+                <div class="stat-label">Total</div>
+            </div>
         </div>
     </div>
 
-    <div class="panel sidebar-right">
-        <h3 style="margin-top:0; font-size:0.9rem; text-transform:uppercase; color:#64748b;">Living Grimoire (97)</h3>
-        <div class="scroller">
-            <div class="skill-node">
-                <h4><span class="tag core">CORE</span>ConnectEdu-3</h4>
-                <span>Next.js 16 / Gemini 3.0 / Jules Memory</span>
+    <!-- RIGHT PANEL: Genesis + Skills -->
+    <div class="panel-right">
+        <div class="panel-section">
+            <div class="panel-title">
+                <span class="layer-dot" style="background:var(--genesis-glow)"></span>
+                L4 Genesis — Ideas
             </div>
-            <div class="skill-node">
-                <h4><span class="tag hygiene">HYGIENE</span>Oblivion Protocol</h4>
-                <span>Failure Management / Debris Purge</span>
+            <div id="genesis-feed">
+                <div class="idea-card">
+                    <div class="idea-title">🐝 Cross-Pollination Engine</div>
+                    <div class="idea-meta">
+                        <span class="idea-badge badge-high">HIGH</span>
+                        EdTech 결제 통합: oet-korea의 Stripe 패턴을 bluel에 적용
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <div class="idea-title">🎲 Serendipity Scout</div>
+                    <div class="idea-meta">
+                        <span class="idea-badge badge-medium">MEDIUM</span>
+                        외부 기회 탐색 대기 — 일요일 첫 스캔 예정
+                    </div>
+                </div>
+                <div class="idea-card">
+                    <div class="idea-title">🔮 Weekly Synthesis</div>
+                    <div class="idea-meta">
+                        <span class="idea-badge badge-medium">PENDING</span>
+                        첫 주간 리포트 생성 대기 중
+                    </div>
+                </div>
             </div>
-            <div class="skill-node">
-                <h4><span class="tag core">CORE</span>Slide DNA Architect</h4>
-                <span>Visual Intelligence / P5.js Hybrid</span>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="panel-section">
+            <div class="panel-title">
+                <span class="layer-dot" style="background:var(--cognition-glow)"></span>
+                L2 Cognition — Living Grimoire (101)
             </div>
-            <div class="skill-node">
-                <h4><span class="tag hygiene">BACKUP</span>Golden Copy Strategy</h4>
-                <span>Zettelkasten 3-2-1 / Exclude node_modules</span>
+            <div id="skill-list">
+                <div class="skill-node genesis">
+                    <h4><span class="tag tag-l4">NEW</span>nightshift</h4>
+                    <span>🌙 Daily reflection at 23:00 — Oblivion Chamber 2.0</span>
+                </div>
+                <div class="skill-node genesis">
+                    <h4><span class="tag tag-l4">NEW</span>cross-pollinator</h4>
+                    <span>🐝 Discover hidden connections between projects</span>
+                </div>
+                <div class="skill-node genesis">
+                    <h4><span class="tag tag-l4">NEW</span>serendipity-scout</h4>
+                    <span>🎲 External opportunity discovery via web scanning</span>
+                </div>
+                <div class="skill-node genesis">
+                    <h4><span class="tag tag-l4">NEW</span>genesis-synthesizer</h4>
+                    <span>🔮 Weekly creative synthesis — Top 3 Ideas</span>
+                </div>
+                <div class="divider"></div>
+                <div class="skill-node core">
+                    <h4><span class="tag tag-l2">CORE</span>ConnectEdu-3</h4>
+                    <span>Next.js 16 / Gemini 3.0 / Jules Memory</span>
+                </div>
+                <div class="skill-node reflection">
+                    <h4><span class="tag tag-l3">HYGIENE</span>Oblivion Protocol</h4>
+                    <span>Failure Management / Debris Purge</span>
+                </div>
+                <div class="skill-node core">
+                    <h4><span class="tag tag-l2">CORE</span>Slide DNA Architect</h4>
+                    <span>Visual Intelligence / P5.js Hybrid</span>
+                </div>
+                <div class="skill-node perception">
+                    <h4><span class="tag tag-l1">BACKUP</span>Golden Copy Strategy</h4>
+                    <span>Zettelkasten 3-2-1 / Exclude node_modules</span>
+                </div>
+                <div class="skill-node core">
+                    <h4><span class="tag tag-l2">TOOL</span>Citation Helper</h4>
+                    <span>Automated Bibliography / APA Format</span>
+                </div>
+                <div class="skill-node core">
+                    <h4><span class="tag tag-l2">TOOL</span>Report Converter</h4>
+                    <span>Markdown to DOCX / Business Logs</span>
+                </div>
             </div>
-            <div class="skill-node">
-                <h4><span class="tag">TOOL</span>Citation Helper</h4>
-                <span>Automated Bibliography / APA Format</span>
-            </div>
-            <div class="skill-node">
-                <h4><span class="tag">TOOL</span>Report Converter</h4>
-                <span>Markdown to DOCX / Business Logs</span>
-            </div>
-            <!-- Dynamic Injection Here -->
         </div>
     </div>
 
     <footer>
-        Running on Antigravity Engine v2.5 | 2026.02.04
+        <div><span class="pulse-indicator"></span>Reflective Intelligence v2.0 — 4-Layer Cognitive Architecture</div>
+        <div id="footer-time"></div>
     </footer>
 
     <script>
-        // Simulate Terminal Life
-        const logs = [
-            "[SEARCH] Indexing 97 skills...",
-            "[NET] Connecting to OpenClaw...",
-            "[OBLIVION] Scanning for tech debt...",
-            "[JULES] Snapshotting environment...",
-            "[KERNEL] Optimizing thought loops..."
-        ];
-        const terminal = document.getElementById('terminal-output');
-        
-        setInterval(() => {
-            const msg = logs[Math.floor(Math.random() * logs.length)];
-            const div = document.createElement('div');
-            div.className = 'log-entry new';
-            div.innerText = msg;
-            terminal.appendChild(div);
-            if(terminal.children.length > 10) terminal.removeChild(terminal.firstChild);
-        }, 3000);
+        // ─── Load Project Registry ───────────────────────────────
+        let allProjects = [];
+        let currentDomain = 'all';
+
+        async function loadRegistry() {
+            try {
+                const resp = await fetch('workspace/perception/project_registry.json');
+                const data = await resp.json();
+
+                allProjects = data.projects || [];
+
+                // Update header
+                document.getElementById('header-projects').textContent = `PROJECTS: ${data.totalProjects}`;
+
+                // Update stats
+                const summary = data.summary || {};
+                document.getElementById('stat-active').textContent = summary.active || 0;
+                document.getElementById('stat-idle').textContent = summary.idle || 0;
+                document.getElementById('stat-dormant').textContent = summary.dormant || 0;
+                document.getElementById('stat-total').textContent = data.totalProjects || 0;
+
+                // Calculate avg health
+                const avgHealth = allProjects.length > 0
+                    ? Math.round(allProjects.reduce((s, p) => s + (p.healthScore || 0), 0) / allProjects.length)
+                    : 0;
+                document.getElementById('core-health').textContent = avgHealth;
+
+                // Build domain tabs
+                const domains = [...new Set(allProjects.map(p => p.domain))].sort();
+                const tabContainer = document.getElementById('domain-tabs');
+                tabContainer.innerHTML = '<button class="domain-tab active" data-domain="all">All</button>';
+                domains.forEach(d => {
+                    const count = allProjects.filter(p => p.domain === d).length;
+                    tabContainer.innerHTML += `<button class="domain-tab" data-domain="${d}">${d} (${count})</button>`;
+                });
+
+                // Tab click handlers
+                tabContainer.querySelectorAll('.domain-tab').forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabContainer.querySelectorAll('.domain-tab').forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        currentDomain = tab.dataset.domain;
+                        renderProjects();
+                    });
+                });
+
+                renderProjects();
+            } catch (e) {
+                document.getElementById('project-list').innerHTML =
+                    '<div class="nightshift-entry warn">⚠ Registry not found. Run generate_registry.ps1</div>';
+            }
+        }
+
+        function renderProjects() {
+            const container = document.getElementById('project-list');
+            const filtered = currentDomain === 'all'
+                ? allProjects
+                : allProjects.filter(p => p.domain === currentDomain);
+
+            container.innerHTML = filtered.map(p => {
+                const health = p.healthScore || 0;
+                const statusClass = p.status === 'active' ? 'status-active' : p.status === 'idle' ? 'status-idle' : 'status-dormant';
+                const barColor = health >= 70 ? 'var(--success)' : health >= 40 ? 'var(--idle)' : 'var(--danger)';
+
+                return `
+                    <div class="project-card">
+                        <div>
+                            <div class="project-name">${p.name}</div>
+                            <div class="project-meta">${p.domain} · ${health}%</div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px">
+                            <div class="health-bar"><div class="health-fill" style="width:${health}%;background:${barColor}"></div></div>
+                            <span class="status-badge ${statusClass}">${p.status}</span>
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+        // ─── Nightshift Feed ─────────────────────────────────────
+        function renderNightshiftFeed() {
+            const feed = document.getElementById('nightshift-feed');
+            const entries = [
+                { cls: 'ok', text: `[${new Date().toLocaleDateString('ko')}] Nightshift 실행 완료` },
+                { cls: '', text: '[PERCEPTION] 38개 프로젝트 스캔 완료' },
+                { cls: 'ok', text: '[ACTIVE] 오늘 커밋: darlbit-claw (4-Layer 구현)' },
+                { cls: 'warn', text: '[OBLIVION] 11개 프로젝트 30일+ 미활동 감지' },
+                { cls: 'danger', text: '[ARCHIVE] _temp_quote_app: 245일 비활성 → 아카이브 권고' },
+                { cls: '', text: '[MEMORY] Proven Pattern 3개 등록 (Stripe, D3, Windows Deploy)' },
+                { cls: 'ok', text: '[GENESIS] Cross-Pollination 대기 중' },
+                { cls: '', text: '[SCHEDULER] Nightshift: 매일 23:00 등록 완료' },
+                { cls: '', text: '[SCHEDULER] Genesis Weekly: 일요일 23:30 등록 완료' },
+            ];
+
+            feed.innerHTML = entries.map(e =>
+                `<div class="nightshift-entry ${e.cls}">${e.text}</div>`
+            ).join('');
+        }
+
+        // ─── Clock ───────────────────────────────────────────────
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toLocaleTimeString('ko', { hour12: false });
+            const dateStr = now.toLocaleDateString('ko', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            document.getElementById('header-time').textContent = timeStr;
+            document.getElementById('footer-time').textContent = `${dateStr} ${timeStr}`;
+        }
+
+        // ─── Init ────────────────────────────────────────────────
+        loadRegistry();
+        renderNightshiftFeed();
+        updateClock();
+        setInterval(updateClock, 1000);
+
+        // Auto-reload registry every 5 minutes
+        setInterval(loadRegistry, 300000);
     </script>
 </body>
 </html>
