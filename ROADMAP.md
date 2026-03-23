@@ -25,19 +25,30 @@ We have surpassed the original OpenClaw's 52 skills.
 
 ## 4. 🗺️ Development Roadmap
 
-### Phase 1: Foundation (Current)
+### Phase 1: Foundation ✅
 -   [x] System Optimization (Oblivion, Backup, Hygiene).
 -   [x] Skill Indexing (97 Skills Mapped).
 -   [x] Agent Personality (Moltbot Rebranding).
 
+### Phase 1.5: Cognitive Architecture ✅ (NEW)
+-   [x] **4-Layer Architecture**: Perception → Cognition → Reflection → Genesis.
+-   [x] **SOUL.md & MEMORY.md**: Agent identity and long-term memory system.
+-   [x] **Oblivion Chamber 2.0**: Anti-Pattern Catalog + Proven Pattern Catalog.
+-   [x] **Genesis Engine**: Cross-Pollinator + Serendipity Scout + Weekly Synthesizer.
+-   [x] **Automation Scripts**: nightshift.ps1, scan_workspace.ps1, generate_registry.ps1.
+-   [x] **4 New Skills**: nightshift, cross-pollinator, serendipity-scout, genesis-synthesizer (→ 101 Skills).
+
 ### Phase 2: Interface (The "Moon" Mirror)
--   [ ] **Dashboard**: A visual interface mirroring `openclaw.cmdspace.work` but with Moon styling (Dark/Midnight Blue).
--   [ ] **Skill Browser**: Interactive searching of the 97 skills (using `skill_search.py` backend).
--   [ ] **Status Monitor**: Real-time heartbeat of Darlbot and Moltbook.
+-   [ ] **Dashboard**: Upgrade `index.html` to real-time dashboard connecting all 4 layers.
+-   [ ] **Skill Browser**: Interactive searching of 101 skills with live metrics.
+-   [ ] **Status Monitor**: Real-time heartbeat of Moltbot, Perception signals, and Genesis insights.
+-   [ ] **Nightshift Viewer**: Visual display of daily reflection logs and trend charts.
 
 ### Phase 3: Expansion (The "Reason")
--   [ ] **Automated Reflection**: Darlbot automatically writing "Nightshift Logs" into the Zettelkasten.
--   [ ] **Knowledge Synthesis**: Merging "Education" and "Tech" skills into a unified "EdTech OS".
+-   [ ] **Nightshift Automation**: Cron/Task Scheduler integration for daily 23:00 reflection.
+-   [ ] **Genesis Automation**: Weekly Sunday synthesis with Telegram report delivery.
+-   [ ] **Paperclip Integration**: Connect 4-Layer Architecture to Paperclip Control Plane.
+-   [ ] **Knowledge Synthesis**: Cross-Pollination engine running on full MoonWorkspace (39 projects).
 
 ---
 **Baseline**: This roadmap replaces the generic "Installation Guide" of existing OpenClaw with a **Philosophy-First** approach.
